@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Number Formatter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #121212;
+      color: #ffffff;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      background-color: #333;
+      color: #fff;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Phone Number Formatter</h2>
+    <div class="form-group">
+      <label for="phone">Enter Phone Number:</label>
+      <input type="text" id="phone" placeholder="Enter phone number">
+    </div>
+    <button class="btn" onclick="generateWAlink()">Generate WA Link</button>
+  </div>
+
+  <script>
+    function generateWAlink() {
+      const phoneNumber = cleansePhoneNumber(document.getElementById('phone').value);
+      const waLink = `https://wa.me/${phoneNumber}`;
+      window.location.href = waLink;
+    }
+    
+    function cleansePhoneNumber(phoneNumber) {
+      const phoneInput = document.getElementById('phone').value;
+      let cleansedPhone = phoneInput.replace(/\D/g, '');
+      if (cleansedPhone.length === 0) {
+        alert('Please enter a valid phone number.');
+        throw new Error('Invalid phone number');
+      }
+      if (cleansedPhone.startsWith('0')) {
+        cleansedPhone = '62' + cleansedPhone.slice(1);
+      }
+      return cleansedPhone;
+    }
+  </script>
+</body>
+</html>
